@@ -15,7 +15,7 @@ class SysStatQCBotPlugin:
         pass
 
     def run(self, message: str, role: str, platform: str, message_obj):
-        if message == "sysstat":
+        if message == "sys":
             core_mem = psutil.Process(os.getpid()).memory_info().rss / 1024 / 1024
             sysmem_info = psutil.virtual_memory()
             cpu_info = psutil.cpu_times
