@@ -1,0 +1,3 @@
+
+QQChannelChatGPT SysStatQCBot插件
+输入sysstat触发插件。
