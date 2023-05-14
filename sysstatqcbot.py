@@ -59,4 +59,17 @@ CPU最小频率: {cpu_freq.min:.2f}MHz
                 return True, tuple([True, res, "sysstatqcbot"])
         else:
             return False, None
-                
+             
+    def info(self):
+        return {
+            "name": "SysStatQCBot",
+            "desc": "查看机器状态的插件",
+            "help": "回复sys即可查看机器状态",
+            "version": "v1.0.0",
+            "author": "Soulter"
+        }
+
+
+        # 热知识：检测消息开头指令，使用以下方法
+        # if message.startswith("原神"):
+        #     pass
