@@ -14,7 +14,7 @@ class SysStatQCBotPlugin:
     def __init__(self) -> None:
         pass
 
-    def run(self, message: str, role: str, platform: str, message_obj):
+    def run(self, message: str, role: str, platform: str, message_obj, qq_platform):
         if message == "sys":
             core_mem = psutil.Process(os.getpid()).memory_info().rss / 1024 / 1024
             sysmem_info = psutil.virtual_memory()
