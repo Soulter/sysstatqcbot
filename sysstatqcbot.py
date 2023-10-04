@@ -47,16 +47,7 @@ CPU最小频率: {cpu_freq.min:.2f}MHz
 空闲磁盘空间: {disk_info.free / 1024 / 1024 / 1024:.2f}GB
 磁盘使用率: {disk_info.percent:.2f}%
             """
-            if platform == "gocq":
-                """
-                QQ平台指令处理逻辑
-                """
-                return True, tuple([True, [Plain(res)], "helloworld"])
-            elif platform == "qqchan":
-                """
-                频道处理逻辑(频道暂时只支持回复字符串类型的信息，返回的信息都会被转成字符串，如果不想处理某一个平台的信息，直接返回False, None就行)
-                """
-                return True, tuple([True, res, "sysstatqcbot"])
+            return True, tuple([True, [Plain(res)], "helloworld"])
         else:
             return False, None
              
