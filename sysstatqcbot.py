@@ -23,7 +23,7 @@ class SysStatQCBotPlugin:
             cpu_ststs = psutil.cpu_stats()
             cpu_freq = psutil.cpu_freq()
             
-            res = f"""【QQChannelChatGPT SysStatQCBot插件】
+            res = f"""【服务器当前状态】
 进程内存占用: {core_mem:.2f}MB
 总内存: {sysmem_info.total / 1024 / 1024:.2f}MB
 已用内存: {sysmem_info.used / 1024 / 1024:.2f}MB
