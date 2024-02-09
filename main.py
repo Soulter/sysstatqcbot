@@ -1,21 +1,18 @@
 from nakuru.entities.components import *
-from nakuru import (
-    GroupMessage,
-    FriendMessage
-)
-from botpy.message import Message, DirectMessage
+try:
+    from util.plugin_dev.api.v1.config import *
+    from util.plugin_dev.api.v1.message import AstrMessageEvent, CommandResult
+    from util.plugin_dev.api.v1.bot import GlobalObject
+except ImportError:
+    raise Exception("astrbot_plugin_telegram: 依赖导入失败。原因：请升级 AstrBot 到最新版本。")
 import psutil
 import os
 
-class SysStatQCBotPlugin:
-    """
-    初始化函数, 可以选择直接pass
-    """
-    def __init__(self) -> None:
-        pass
+class Main():
 
-    def run(self, message: str, role: str, platform: str, message_obj, qq_platform):
-        if message == "sys":
+    def run(self, ame: AstrMessageEvent):
+        plain_text = ame.message_str
+        if plain_text == "sys" or plain_text == "/sys":
             core_mem = psutil.Process(os.getpid()).memory_info().rss / 1024 / 1024
             sysmem_info = psutil.virtual_memory()
             cpu_info = psutil.cpu_times
@@ -45,22 +42,29 @@ CPU最小频率: {cpu_freq.min:.2f}MHz
 总磁盘空间: {disk_info.total / 1024 / 1024 / 1024:.2f}GB
 已用磁盘空间: {disk_info.used / 1024 / 1024 / 1024:.2f}GB
 空闲磁盘空间: {disk_info.free / 1024 / 1024 / 1024:.2f}GB
-磁盘使用率: {disk_info.percent:.2f}%
-            """
-            return True, tuple([True, [Plain(res)], "helloworld"])
+磁盘使用率: {disk_info.percent:.2f}%"""
+            return CommandResult(
+                hit=True,
+                success=True,
+                result_message=[
+                    Plain(text=res),
+                ],
+                command_name="sys"
+            )
         else:
-            return False, None
-             
+            # no operation
+            return CommandResult(
+                hit=False,
+                success=False,
+                result_message=None
+            )
+            
     def info(self):
         return {
-            "name": "SysStatQCBot",
-            "desc": "查看机器状态的插件",
-            "help": "回复sys即可查看机器状态",
-            "version": "v1.0.0",
-            "author": "Soulter"
+            "name": "astrbot_plugin_systemstat",
+            "desc": "查看机器 CPU、内存、磁盘等状态",
+            "help": "回复 sys 即可查看机器状态",
+            "version": "v1.0.1",
+            "author": "Soulter",
+            "repo": "https://github.com/Soulter/sysstatqcbot/"
         }
-
-
-        # 热知识：检测消息开头指令，使用以下方法
-        # if message.startswith("原神"):
-        #     pass
